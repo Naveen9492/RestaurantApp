@@ -1,0 +1,48 @@
+.menu-container {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  overflow-x: auto; /* scroll on small screens */
+  scroll-behavior: smooth;
+  padding: 0 10px; /* small padding at ends */
+  gap: 10px; /* spacing between buttons */
+}
+
+/* Hide scrollbar in Webkit browsers */
+.menu-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Buttons styling */
+.menu-button,
+.active-menu-button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  height: 100%;
+  padding: 0 15px; /* horizontal padding for buttons */
+  white-space: nowrap; /* prevent text wrap */
+}
+
+.menu-button {
+  color: rgb(78, 72, 72);
+}
+
+.active-menu-button {
+  color: rgb(185, 70, 70);
+  font-weight: bold;
+  border-bottom: 2px solid rgb(185, 70, 70);
+}
+
+/* Responsive adjustments */
+@media screen and (min-width: 768px) {
+  .menu-container {
+    justify-content: flex-start; /* align left on desktop */
+    gap: 20px;
+    overflow-x: visible;
+  }
+}
