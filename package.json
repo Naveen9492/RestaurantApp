@@ -16,7 +16,8 @@
     "react-icons": "4.2.0",
     "react-loader-spinner": "4.0.0",
     "react-router-dom": "5.3.0",
-    "react-slick": "0.31.0"
+    "react-slick": "0.31.0",
+    "serve": "14.2.6"
   },
   "devDependencies": {
     "eslint-config-airbnb": "18.2.1",
@@ -30,7 +31,7 @@
     "react-scripts": "4.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint .",
