@@ -4,23 +4,17 @@ import './index.css'
 const DishItem = props => (
   <ResContext.Consumer>
     {value => {
-      const {cartItemsList, updateCartItemsList} = value
+      const {
+        cartList,
+        addCartItem,
+        incrementCartItemQuantity,
+        decrementCartItemQuantity,
+      } = value
+
       const {eachItem} = props
 
-      const cartItem = cartItemsList.find(
-        item => item.dish_id === eachItem.dish_id,
-      )
-      const cartCount = cartItem ? cartItem.count : 0
-
-      const handleIncrease = () => {
-        updateCartItemsList({...eachItem, change: 1})
-      }
-
-      const handleDecrease = () => {
-        if (cartCount > 0) {
-          updateCartItemsList({...eachItem, change: -1})
-        }
-      }
+      const cartItem = cartList.find(item => item.dish_id === eachItem.dish_id)
+      const cartCount = cartItem ? cartItem.quantity : 0
 
       const iconBorder =
         eachItem.dish_Type === 2 ? 'veg-border' : 'non-veg-border'
@@ -45,32 +39,49 @@ const DishItem = props => (
               </p>
               <p className="dish-description">{eachItem.dish_description}</p>
 
-              <div className="add-to-cart-button-container">
-                <button
-                  type="button"
-                  className="add-to-cart-button"
-                  onClick={handleDecrease}
-                  disabled={
-                    cartCount === 0 || eachItem.dish_Availability === false
-                  }
-                >
-                  -
-                </button>
+              {eachItem.dish_Availability === true ? (
+                <div className="button-container">
+                  <button
+                    type="button"
+                    className="addtocart-button-main"
+                    onClick={() => addCartItem(eachItem)}
+                  >
+                    ADD TO CART
+                  </button>
+                  {cartCount > 0 && (
+                    <div className="add-to-cart-button-container">
+                      <button
+                        type="button"
+                        className="add-to-cart-button"
+                        onClick={() =>
+                          decrementCartItemQuantity(eachItem.dish_id)
+                        }
+                        disabled={
+                          cartCount === 0 ||
+                          eachItem.dish_Availability === false
+                        }
+                      >
+                        -
+                      </button>
 
-                <p data-testid="quantity" className="cart-count">
-                  {cartCount}
-                </p>
+                      <p data-testid="quantity" className="cart-count">
+                        {cartCount}
+                      </p>
 
-                <button
-                  type="button"
-                  className="add-to-cart-button"
-                  onClick={handleIncrease}
-                  disabled={eachItem.dish_Availability === false}
-                >
-                  +
-                </button>
-              </div>
-              {eachItem.dish_Availability === false && (
+                      <button
+                        type="button"
+                        className="add-to-cart-button"
+                        onClick={() =>
+                          incrementCartItemQuantity(eachItem.dish_id)
+                        }
+                        disabled={eachItem.dish_Availability === false}
+                      >
+                        +
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
                 <p className="not-available-text">Not available</p>
               )}
 

@@ -1,10 +1,12 @@
 import React from 'react'
 
 const ResContext = React.createContext({
-  cartItemsList: [],
-  updateCartItemsList: () => {},
-  restaurantName: '',
-  setRestaurantName: () => {},
+  cartList: [],
+  removeAllCartItems: () => {},
+  addCartItem: () => {},
+  removeCartItem: () => {},
+  incrementCartItemQuantity: () => {},
+  decrementCartItemQuantity: () => {},
 })
 
 export default ResContext

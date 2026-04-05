@@ -2,7 +2,6 @@ import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 import CategoryMenuList from '../CategoryMenuList'
 import MenuItemsContainer from '../MenuItemsContainer'
-import ResContext from '../../context/ResContext'
 import './index.css'
 
 const apiConstants = {
@@ -60,13 +59,8 @@ class Body extends Component {
         activeMenuId: formattedMenuList[0].menu_category_id,
         apiStatus: apiConstants.success,
       })
-
-      const {setRestaurantName} = this.context
-      setRestaurantName(restaurantData.restaurant_name)
     } catch (error) {
       this.setState({apiStatus: apiConstants.failure})
-      const {setRestaurantName} = this.context
-      setRestaurantName('UNI Resto Cafe')
     }
   }
 
@@ -121,5 +115,4 @@ class Body extends Component {
   }
 }
 
-Body.contextType = ResContext
 export default Body

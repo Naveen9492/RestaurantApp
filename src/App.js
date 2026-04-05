@@ -6,67 +6,86 @@ import Body from './components/Body'
 import './App.css'
 
 class App extends Component {
-  state = {
-    cartItemsList: [],
-    restaurantName: '',
+  state = {cartList: []}
+
+  removeAllCartItems = () => {
+    this.setState({cartList: []})
   }
 
-  setRestaurantName = name => {
-    this.setState({restaurantName: name})
-  }
-
-  updateCartItemsList = itemDetails => {
+  addCartItem = itemDetails => {
     this.setState(prevState => {
-      const existingItem = prevState.cartItemsList.find(
+      const existingItem = prevState.cartList.find(
         item => item.dish_id === itemDetails.dish_id,
       )
 
-      if (!existingItem && itemDetails.change < 0) {
-        return null
-      }
       if (existingItem) {
-        const newCount = existingItem.count + itemDetails.change
-
-        if (newCount <= 0) {
-          return {
-            cartItemsList: prevState.cartItemsList.filter(
-              item => item.dish_id !== itemDetails.dish_id,
-            ),
-          }
-        }
-
         return {
-          cartItemsList: prevState.cartItemsList.map(item =>
+          cartList: prevState.cartList.map(item =>
             item.dish_id === itemDetails.dish_id
-              ? {...item, count: newCount}
+              ? {...item, quantity: item.quantity + 1}
               : item,
           ),
         }
       }
 
-      if (itemDetails.change > 0) {
+      return {
+        cartList: [...prevState.cartList, {...itemDetails, quantity: 1}],
+      }
+    })
+  }
+
+  removeCartItem = itemDetails => {
+    this.setState(prevState => ({
+      cartList: prevState.cartList.filter(
+        eachItem => eachItem.dish_id !== itemDetails.dish_id,
+      ),
+    }))
+  }
+
+  incrementCartItemQuantity = dishId => {
+    this.setState(prevState => ({
+      cartList: prevState.cartList.map(item =>
+        item.dish_id === dishId ? {...item, quantity: item.quantity + 1} : item,
+      ),
+    }))
+  }
+
+  decrementCartItemQuantity = dishId => {
+    this.setState(prevState => {
+      const existingItem = prevState.cartList.find(
+        item => item.dish_id === dishId,
+      )
+
+      if (!existingItem) return null
+
+      if (existingItem.quantity > 1) {
         return {
-          cartItemsList: [
-            ...prevState.cartItemsList,
-            {...itemDetails, count: itemDetails.change},
-          ],
+          cartList: prevState.cartList.map(item =>
+            item.dish_id === dishId
+              ? {...item, quantity: item.quantity - 1}
+              : item,
+          ),
         }
       }
 
-      return null
+      return {
+        cartList: prevState.cartList.filter(item => item.dish_id !== dishId),
+      }
     })
   }
 
   render() {
-    const {cartItemsList, restaurantName} = this.state
+    const {cartList} = this.state
 
     return (
       <ResContext.Provider
         value={{
-          cartItemsList,
-          updateCartItemsList: this.updateCartItemsList,
-          restaurantName,
-          setRestaurantName: this.setRestaurantName,
+          cartList,
+          addCartItem: this.addCartItem,
+          removeCartItem: this.removeCartItem,
+          incrementCartItemQuantity: this.incrementCartItemQuantity,
+          decrementCartItemQuantity: this.decrementCartItemQuantity,
+          removeAllCartItems: this.removeAllCartItems,
         }}
       >
         <>

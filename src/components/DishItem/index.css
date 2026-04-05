@@ -101,6 +101,20 @@
   cursor: pointer;
 }
 
+.addtocart-button-main {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 8px 15px;
+  background-color: #d70707;
+  font-family: 'Roboto';
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 15px;
+  margin: 10px 0px;
+}
+
 .customization-text {
   font-size: 13px;
   color: #416bea;
