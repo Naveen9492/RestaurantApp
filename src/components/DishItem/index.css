@@ -131,6 +131,7 @@
   .dish-image {
     width: 150px;
     height: 140px;
+    order: 1;
   }
 
   .dish-name {

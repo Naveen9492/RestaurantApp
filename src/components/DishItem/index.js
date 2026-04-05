@@ -28,6 +28,11 @@ const DishItem = props => (
 
       return (
         <li className="dish-listitem">
+          <img
+            className="dish-image"
+            src={eachItem.dish_image}
+            alt={eachItem.dish_name}
+          />
           <div className="icon-dish-details-container">
             <div className={iconBorder}>
               <div className={iconInner} />
@@ -40,32 +45,33 @@ const DishItem = props => (
               </p>
               <p className="dish-description">{eachItem.dish_description}</p>
 
-              {eachItem.dish_Availability ? (
-                <div className="add-to-cart-button-container">
-                  <button
-                    type="button"
-                    className="add-to-cart-button"
-                    onClick={handleDecrease}
-                    disabled={cartCount === 0}
-                  >
-                    -
-                  </button>
+              <div className="add-to-cart-button-container">
+                <button
+                  type="button"
+                  className="add-to-cart-button"
+                  onClick={handleDecrease}
+                  disabled={
+                    cartCount === 0 || eachItem.dish_Availability === false
+                  }
+                >
+                  -
+                </button>
 
-                  <p data-testid="quantity">{cartCount}</p>
+                <p data-testid="quantity" className="cart-count">
+                  {cartCount}
+                </p>
 
-                  <button
-                    type="button"
-                    className="add-to-cart-button"
-                    onClick={handleIncrease}
-                  >
-                    +
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <p data-testid="quantity">{cartCount}</p>
-                  <p className="not-available-text">Not available</p>
-                </>
+                <button
+                  type="button"
+                  className="add-to-cart-button"
+                  onClick={handleIncrease}
+                  disabled={eachItem.dish_Availability === false}
+                >
+                  +
+                </button>
+              </div>
+              {eachItem.dish_Availability === false && (
+                <p className="not-available-text">Not available</p>
               )}
 
               {eachItem.addonCat && eachItem.addonCat.length > 0 && (
@@ -75,12 +81,6 @@ const DishItem = props => (
           </div>
 
           <p className="calories">{eachItem.dish_calories} calories</p>
-
-          <img
-            className="dish-image"
-            src={eachItem.dish_image}
-            alt={eachItem.dish_name}
-          />
         </li>
       )
     }}
