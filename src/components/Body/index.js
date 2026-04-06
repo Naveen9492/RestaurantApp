@@ -51,7 +51,7 @@ class Body extends Component {
           dish_Availability: dish.dish_Availability,
           dish_Type: dish.dish_Type,
           addonCat: dish.addonCat || [],
-          quantity: 0,
+          dish_quantity: 0,
         })),
       }))
 

@@ -21,15 +21,13 @@ class App extends Component {
       if (existingItem) {
         return {
           cartList: prevState.cartList.map(item =>
-            item.dish_id === itemDetails.dish_id
-              ? {...item, quantity: item.quantity + 1}
-              : item,
+            item.dish_id === itemDetails.dish_id ? itemDetails : item,
           ),
         }
       }
 
       return {
-        cartList: [...prevState.cartList, {...itemDetails, quantity: 1}],
+        cartList: [...prevState.cartList, itemDetails],
       }
     })
   }
