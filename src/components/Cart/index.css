@@ -1,0 +1,118 @@
+.cart-container {
+  min-height: 90vh;
+  width: 100%;
+  padding: 15px;
+  font-family: 'Roboto';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cart-heading {
+  font-size: 20px;
+}
+.remove-all-button {
+  align-self: flex-end;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 15px;
+}
+.no-orders-text {
+  text-align: center;
+}
+.cart-item-container {
+  width: 100%;
+  border: 1px solid #000000;
+  list-style: none;
+  padding: 0px;
+}
+.each-item-container {
+  border: 1px solid #000000;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dish-name-cart {
+  color: #9f0707;
+  font-size: 15px;
+  width: 30%;
+}
+.each-item-quantity-container {
+  display: flex;
+  align-items: center;
+  width: 30%;
+}
+.minus-plus-button-cart {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 5px;
+}
+.each-item-qty-cart {
+  font-size: 15px;
+  font-weight: 500;
+}
+.dish-item-cart-price {
+  font-size: 15px;
+  color: #302f2f;
+  width: 30%;
+}
+.dish-item-cart-price-span {
+  font-size: 15px;
+  font-weight: 500;
+}
+.remove-item-cart-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+.cross-icon-cart {
+  width: 20px;
+  height: 20px;
+}
+.total-price-container {
+  align-self: flex-end;
+}
+.total-price {
+  font-size: 16px;
+}
+.total-price-span {
+  font-weight: bold;
+  font-size: 20px;
+  color: #9f0707;
+}
+.checkout-button {
+  padding: 10px 15px;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #3e2292;
+  border-radius: 3px;
+  font-family: 'Roboto';
+  color: #ffffff;
+}
+
+@media screen and (min-width: 768px) {
+  .dish-name-cart {
+    width: 50%;
+  }
+  .each-item-quantity-container {
+    width: 20%;
+  }
+  .dish-item-cart-price {
+    width: 20%;
+  }
+  .remove-item-cart-button {
+    margin-right: 5px;
+  }
+}

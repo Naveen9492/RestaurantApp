@@ -1,5 +1,5 @@
 import {useState, useEffect, useContext} from 'react'
-import ResContext from '../../context/ResContext'
+import CartContext from '../../context/CartContext'
 import './index.css'
 
 const DishItem = props => {
@@ -10,7 +10,7 @@ const DishItem = props => {
     removeCartItem,
     incrementCartItemQuantity,
     decrementCartItemQuantity,
-  } = useContext(ResContext)
+  } = useContext(CartContext)
   const [quantity, setQuantity] = useState(eachItem.dish_quantity)
   const [isAddedToCart, setIsAddedToCart] = useState(false)
 

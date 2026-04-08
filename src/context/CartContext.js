@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ResContext = React.createContext({
+const CartContext = React.createContext({
   cartList: [],
   removeAllCartItems: () => {},
   addCartItem: () => {},
@@ -9,4 +9,4 @@ const ResContext = React.createContext({
   decrementCartItemQuantity: () => {},
 })
 
-export default ResContext
+export default CartContext

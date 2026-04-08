@@ -1,8 +1,11 @@
 import {Component} from 'react'
-
+import {Switch, Route} from 'react-router-dom'
+import ProtectedRoute from './components/ProtectedRoute'
 import Header from './components/Header'
-import ResContext from './context/ResContext'
+import CartContext from './context/CartContext'
 import Body from './components/Body'
+import Login from './components/Login'
+import Cart from './components/Cart'
 import './App.css'
 
 class App extends Component {
@@ -76,7 +79,7 @@ class App extends Component {
     const {cartList} = this.state
 
     return (
-      <ResContext.Provider
+      <CartContext.Provider
         value={{
           cartList,
           addCartItem: this.addCartItem,
@@ -88,9 +91,13 @@ class App extends Component {
       >
         <>
           <Header />
-          <Body />
+          <Switch>
+            <ProtectedRoute exact path="/" component={Body} />
+            <ProtectedRoute exact path="/cart" component={Cart} />
+            <Route path="/login" component={Login} />
+          </Switch>
         </>
-      </ResContext.Provider>
+      </CartContext.Provider>
     )
   }
 }

@@ -1,9 +1,11 @@
 import {HiOutlineShoppingCart} from 'react-icons/hi'
 import {useEffect, useState} from 'react'
-import ResContext from '../../context/ResContext'
+import Cookies from 'js-cookie'
+import {Link, withRouter} from 'react-router-dom'
+import CartContext from '../../context/CartContext'
 import './index.css'
 
-const Header = () => {
+const Header = props => {
   const [restaurantName, setRestaurantName] = useState('')
 
   useEffect(() => {
@@ -26,26 +28,55 @@ const Header = () => {
     fetchRestaurantName()
   }, [])
 
+  const onClickLogout = () => {
+    Cookies.remove('jwt_token')
+    const {history} = props
+    history.replace('/login')
+  }
+
   return (
-    <ResContext.Consumer>
+    <CartContext.Consumer>
       {value => {
         const {cartList} = value
 
         return (
           <div className="header-container">
-            <h1 className="logo-name">{restaurantName}</h1>
-            <div className="my-order-and-icon-container">
-              <p className="my-orders-text">My Orders</p>
-              <div className="cart-icon-container">
-                <HiOutlineShoppingCart className="cart-icon" />
-                <p className="cart-number">{cartList.length}</p>
+            <Link to="/" className="nav-link">
+              <h1 className="logo-name">{restaurantName}</h1>
+            </Link>
+            {Cookies.get('jwt_token') && (
+              <div className="my-order-and-icon-container">
+                <p className="my-orders-text">My Orders</p>
+
+                <button
+                  type="button"
+                  className="logout-button"
+                  onClick={onClickLogout}
+                >
+                  Logout
+                </button>
+
+                <div>
+                  <Link to="/cart">
+                    <button
+                      type="button"
+                      data-testid="cart"
+                      className="cart-button"
+                    >
+                      <div className="cart-icon-container">
+                        <HiOutlineShoppingCart className="cart-icon" />
+                        <p className="cart-number">{cartList.length}</p>
+                      </div>
+                    </button>
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         )
       }}
-    </ResContext.Consumer>
+    </CartContext.Consumer>
   )
 }
 
-export default Header
+export default withRouter(Header)
