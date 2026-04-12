@@ -37,9 +37,9 @@ const Cart = () => (
 
       return (
         <div className="cart-container">
-          <h1 className="cart-heading">Cart Details</h1>
           {cartList.length > 0 ? (
             <>
+              <h1 className="cart-heading">Cart Details</h1>
               <button
                 type="button"
                 className="remove-all-button"
@@ -50,6 +50,11 @@ const Cart = () => (
               <ul className="cart-item-container">
                 {cartList.map(eachItem => (
                   <li className="each-item-container" key={eachItem.dish_id}>
+                    <img
+                      src={eachItem.dish_image}
+                      alt={eachItem.dish_name}
+                      className="cart-route-item-image"
+                    />
                     <p className="dish-name-cart">{eachItem.dish_name}</p>
                     <div className="each-item-quantity-container">
                       <button
@@ -65,15 +70,13 @@ const Cart = () => (
                       <button
                         type="button"
                         className="minus-plus-button-cart"
-                        onClick={() => {
-                          onClickPlusButton(eachItem.dish_id)
-                        }}
+                        onClick={() => onClickPlusButton(eachItem.dish_id)}
                       >
                         +
                       </button>
                     </div>
                     <p className="dish-item-cart-price">
-                      Price{' '}
+                      SAR{' '}
                       <span className="dish-item-cart-price-span">
                         {eachItem.quantity * eachItem.dish_price}
                       </span>
@@ -98,6 +101,7 @@ const Cart = () => (
                 <p className="total-price">
                   Total Price{' '}
                   <span className="total-price-span">
+                    SAR{' '}
                     {cartList.reduce(
                       (acc, item) => acc + item.quantity * item.dish_price,
                       0,
@@ -111,7 +115,14 @@ const Cart = () => (
               </div>
             </>
           ) : (
-            <p className="no-orders-text">No items added</p>
+            <>
+              <img
+                src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-empty-cart-img.png"
+                alt="cart empty"
+                className="cart-empty-image"
+              />
+              <p className="no-orders-text">No items added</p>
+            </>
           )}
         </div>
       )

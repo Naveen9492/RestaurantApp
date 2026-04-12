@@ -89,14 +89,21 @@ class App extends Component {
           removeAllCartItems: this.removeAllCartItems,
         }}
       >
-        <>
-          <Header />
-          <Switch>
-            <ProtectedRoute exact path="/" component={Body} />
-            <ProtectedRoute exact path="/cart" component={Cart} />
-            <Route path="/login" component={Login} />
-          </Switch>
-        </>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <ProtectedRoute exact path="/">
+            <>
+              <Header />
+              <Body />
+            </>
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/cart">
+            <>
+              <Header />
+              <Cart />
+            </>
+          </ProtectedRoute>
+        </Switch>
       </CartContext.Provider>
     )
   }
